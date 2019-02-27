@@ -52,13 +52,16 @@ public class ControllerServlet extends HttpServlet {
 			switch(action) {
 				case "/admin":
 					 showBookAdmin(request, response);
-           break;
+           			 break;
 			  case "/new":
 					showNewForm(request, response);
-          break;
-				case "/insert":
+          			break;
+			case "/insert":
 					insertBook(request, response);
           break;
+          		case "/delete":
+				deleteBook(request, response);
+          		break;
         default:
 				   listBooks(request, response);
            break;
@@ -108,6 +111,15 @@ public class ControllerServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+
+	private void deleteBook(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+		int id = Integer.parseInt(request.getParameter("id"));
+		bookDAO.deleteBook(id);
+		response.sendRedirect("list");
+
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
